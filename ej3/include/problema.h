@@ -10,26 +10,36 @@
 
 using namespace std;
 
+struct Casillero{
+	Casillero(pair<int,int> coord,int usado){
+		_coord = coord;
+		_usado = usado;
+	}
+	pair<int,int> _coord;
+	bool _usado;
+};
+
 struct Problema{
 
 	vector< vector<int> > _matriz;
-	vector< pair<int,int> > _casilleros;
-	vector< pair<int,int> > _casillerosImportantes;
+	vector< Casillero > _casilleros;
+	vector< Casillero > _casillerosImportantes;
 	vector< vector<int> > _matrizRes;
 	int _costo;
 	
 	void resolver();
 	Problema (istream&);
 	void insertarSensor(int);
-	bool leApuntaUnLaserHorizontal(pair<int,int>);
-	bool leApuntaUnLaserVertical(pair<int,int>);
+	bool leApuntaUnLaserHorizontal(Casillero&);
+	bool leApuntaUnLaserVertical(Casillero&);
 	void mostrarCasilleros(ostream&);
 	void cargarCasilleros();
 	void mostrarMatriz(ostream&);
-	bool leApuntanDosLasers(pair<int,int>);
-	bool puedoColocarSensor(pair<int,int>, int);
-	void backtrack(vector< pair<int,int> >&,int);
+	bool leApuntanDosLasers(Casillero&);
+	bool puedoColocarSensor(Casillero&, int);
+	void backtrack(vector<Casillero>&,int);
 	bool esSolucion();
+	bool hayMas(vector<Casillero>&);
 };
 
 #endif
