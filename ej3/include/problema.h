@@ -16,6 +16,7 @@ struct Problema{
 	vector< pair<int,int> > _casilleros;
 	vector< pair<int,int> > _casillerosImportantes;
 	vector< vector<int> > _matrizRes;
+	int _costo;
 	
 	void resolver();
 	Problema (istream&);
@@ -26,6 +27,9 @@ struct Problema{
 	void cargarCasilleros();
 	void mostrarMatriz(ostream&);
 	bool leApuntanDosLasers(pair<int,int>);
+	bool puedoColocarSensor(pair<int,int>, int);
+	void backtrack(vector< pair<int,int> >&,int);
+	bool esSolucion();
 };
 
 #endif
