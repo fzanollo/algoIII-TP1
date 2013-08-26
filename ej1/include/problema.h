@@ -27,7 +27,7 @@ struct camion {
 class comparar{
 	public:
 	bool operator() (const camion& c1, const camion& c2){
-	return (c1.peso < c2.peso);		//aca hay que ver si va al reves
+	return (c1.peso > c2.peso);		//aca hay que ver si va al reves
 	}
 };
 
