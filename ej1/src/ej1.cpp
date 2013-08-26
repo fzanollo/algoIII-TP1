@@ -21,7 +21,6 @@ void Problema:: resolver(){
 	camiones.push_back(c.peso);  //pusheamos el peso del paquete a la lista de pesos de camiones
 	heap_camiones.push(c);		//pusheamos el camion al heap
 	
-		cout << "cantidad de camiones es"<< this->cant_camiones << endl;
 
 	
 	for(int i =1; i<cant_paquetes;i++){
@@ -40,7 +39,6 @@ void Problema:: resolver(){
 		}
 	}
 	this->cant_camiones=k;	
-	cout << "cantidad de camiones es"<< this->cant_camiones << endl;
 	
 }
 
