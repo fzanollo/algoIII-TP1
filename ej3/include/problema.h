@@ -10,14 +10,7 @@
 
 using namespace std;
 
-struct Casillero{
-	Casillero(pair<int,int> coord,int usado){
-		_coord = coord;
-		_usado = usado;
-	}
-	pair<int,int> _coord;
-	bool _usado;
-};
+typedef pair<int,int> Casillero;
 
 struct Problema{
 
@@ -37,9 +30,13 @@ struct Problema{
 	void mostrarMatriz(ostream&);
 	bool leApuntanDosLasers(Casillero&);
 	bool puedoColocarSensor(Casillero&, int);
-	void backtrack(vector<Casillero>&,int);
+	void backtrack(vector<bool>&,int);
 	bool esSolucion();
-	bool hayMas(vector<Casillero>&);
+	bool hayMas(vector<bool>&);
+	void marcarCasilleros(Casillero,int,vector<bool>&);
+	bool hayLaser(int);
+	bool cumpleHastaElMomento(vector<bool>&);
+	bool filasYColumnasCubiertas(Casillero,vector<bool>&);
 };
 
 #endif
