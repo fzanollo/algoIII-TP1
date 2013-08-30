@@ -96,11 +96,11 @@ bool Problema::puedoColocarSensor(Casillero& casillero, int sensor){ //chequea q
 	
 	if (sensor==5){
 		for (int i=casillero.first+1; i<_matriz[casillero.first].size();++i){
-			if (_matriz[i][casillero.second] == 5 || _matriz[i][casillero.second] == 4 || _matriz[i][casillero.second] == 5) return false;
+			if (_matriz[i][casillero.second] == 3 || _matriz[i][casillero.second] == 4 || _matriz[i][casillero.second] == 5) return false;
 			if (_matriz[i][casillero.second] == 0) break;
 		}
 		for (int i=casillero.first-1; i>=0;--i){
-			if (_matriz[i][casillero.second] == 5 || _matriz[i][casillero.second] == 4 || _matriz[i][casillero.second] == 5) return false;
+			if (_matriz[i][casillero.second] == 3 || _matriz[i][casillero.second] == 4 || _matriz[i][casillero.second] == 5) return false;
 			if (_matriz[i][casillero.second] == 0) return true;
 		}
 		return true;
@@ -139,36 +139,76 @@ bool Problema::hayMas(vector<bool>& casillerosUsados){
 	return false;
 }
 
+bool Problema::hayParedEnElMedio(Casillero& c, Casillero& s){
+	if (c.first==s.first){
+		if (c.second<s.second){
+			for (int j=c.second;j<=s.second;++j){
+				if (_matriz[c.first][j]==0) return true;
+			}
+		}
+		else{
+			for (int j=s.second;j<=c.second;++j){
+				if (_matriz[c.first][j]==0) return true;
+			}			
+		}
+	}
+	else{
+		if (c.first<s.first){
+			for (int i=c.first;i<=s.first;++i){
+				if (_matriz[i][c.second]==0) return true;
+			}
+		}
+		else{
+			for (int i=s.first;i<=c.first;++i){
+				if (_matriz[i][c.second]==0) return true;
+			}
+		}
+	}
+	return false;
+}
+
 void Problema::marcarCasilleros(Casillero c,int s, vector<bool>& casillerosUsados){
 	if(s==3){	
 		for (int i=0;i<_casilleros.size();++i){
-			if(_casilleros[i].first==c.first && leApuntaUnLaserHorizontal(_casilleros[i])) casillerosUsados[i] = 1;
+			if(_casilleros[i].first==c.first && !hayParedEnElMedio(c,_casilleros[i])) casillerosUsados[i] = 1;
 		}	
 	}
 	if(s==4){
 		for (int i=0;i<_casilleros.size();++i){
-			if( (_casilleros[i].first==c.first || _casilleros[i].second==c.second) && leApuntanDosLasers(_casilleros[i]) ) casillerosUsados[i] = 1;
+			if( (_casilleros[i].first==c.first || _casilleros[i].second==c.second) && !hayParedEnElMedio(c,_casilleros[i]) ) casillerosUsados[i] = 1;
 		}
 	}
 	if(s==5){
 		for(int i=0;i<_casilleros.size();++i){
-			if(_casilleros[i].second==c.second && leApuntaUnLaserVertical(_casilleros[i])) casillerosUsados[i] = 1;
+			if(_casilleros[i].second==c.second && !hayParedEnElMedio(c,_casilleros[i])) casillerosUsados[i] = 1;
 		}
 	}
 }
 
 bool Problema::cumpleHastaElMomento(vector<bool>& casillerosUsados){
 	for (int i=0;i<_casillerosImportantes.size();++i){
-		if (filasYColumnasCubiertas(_casillerosImportantes[i],casillerosUsados)){
-			if (!leApuntanDosLasers(_casillerosImportantes[i]))	return false;	 
+		if (filaCubierta(_casillerosImportantes[i],casillerosUsados)){
+			if (!leApuntaUnLaserHorizontal(_casillerosImportantes[i]))	return false;	 
+		}
+		if (columnaCubierta(_casillerosImportantes[i],casillerosUsados)){
+			if (!leApuntaUnLaserVertical(_casillerosImportantes[i]))	return false;	 
 		}
 	}
 	return true;	
 }
 
-bool Problema::filasYColumnasCubiertas(Casillero casillero, vector<bool>& casillerosUsados){
+bool Problema::filaCubierta(Casillero casillero, vector<bool>& casillerosUsados){
 	for (int i=0;i<_casilleros.size();++i){
-		if (_casilleros[i].first==casillero.first || _casilleros[i].second==casillero.second){
+		if (_casilleros[i].first==casillero.first && !hayParedEnElMedio(_casilleros[i],casillero)){
+			if (casillerosUsados[i]!=1) return false;
+		}
+	}
+	return true;
+}
+
+bool Problema::columnaCubierta(Casillero casillero, vector<bool>& casillerosUsados){
+	for (int i=0;i<_casilleros.size();++i){
+		if (_casilleros[i].second==casillero.second && !hayParedEnElMedio(_casilleros[i],casillero)){
 			if (casillerosUsados[i]!=1) return false;
 		}
 	}

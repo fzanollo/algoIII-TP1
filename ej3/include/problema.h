@@ -36,7 +36,9 @@ struct Problema{
 	void marcarCasilleros(Casillero,int,vector<bool>&);
 	bool hayLaser(int);
 	bool cumpleHastaElMomento(vector<bool>&);
-	bool filasYColumnasCubiertas(Casillero,vector<bool>&);
+	bool filaCubierta(Casillero,vector<bool>&);
+	bool columnaCubierta(Casillero,vector<bool>&);
+	bool hayParedEnElMedio(Casillero&,Casillero&);
 };
 
 #endif
