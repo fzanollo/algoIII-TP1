@@ -1,5 +1,41 @@
 \subsection{Pseudoc\'odigo}
 
-%Explicar de forma clara, sencilla, estructurada y concisa, las ideas desarrolladas para la resolucion del problema- Para esto se sugiere utilizar pseudocodigo y lenguaje coloquial combinando adecuadamente ambas herramientas. Es importante que lo expuesto en este punto sea suficiente para el desarrollo de los puntos subsiguientes, pero no excesivo.
+Algunas aclaraciones:
 
+\begin{enumerate}[1.]
+\item Un cami\'on tiene un int peso (peso de paquetes que contiene) y un int \'indice (orden en el que fueron creados).
+\item Usamos dos estructuras, un "minheap" de camiones (se ordena de acuerdo al peso del camion) y un arreglo de camiones ordenado de acuerdo al indice de los camiones. 
+\end{enumerate}
+
+La funcion que resuelve el problema es la siguiente:
+
+
+void resolver(){
+	
+	int camion_k = 0;  
+	camion c(paquetes[0], k);
+	camiones.push_back(c.peso);  //pusheamos el peso del paquete a la lista de pesos de camiones
+	heap_camiones.push(c);	    //pusheamos el camion al heap
+	
+
+	
+	para(int i =1; i< cant_paquetes;i++){
+		si(paquetes[i] entra en el  ){ //si le entra
+				camion auxc(heap_camiones.top()); //tomo el camion mas liviano del heap
+				heap_camiones.pop(); //saco el mas liviano
+				auxc.peso = auxc.peso + paquetes[i];
+				heap_camiones.push(auxc);  // se puede acceder al elemento una vez q lo metimos el el heap?
+				camiones[auxc.indice] = auxc.peso;
+		}else{
+				k++; //aumentamos el idice de camiones
+				camion mionca(paquetes[i],k);
+				heap_camiones.push(mionca);
+				camiones.push_back(mionca.peso);
+			
+		}
+	}
+	this->cant_camiones=k+1;
+	mostrarResultado(cout);
+	
+}
 
