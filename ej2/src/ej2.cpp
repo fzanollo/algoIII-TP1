@@ -19,6 +19,7 @@ void Problema::verGraficamente(ostream& os){
 		}
 		os<<endl;
 	}
+	os<<endl;
 }
 
 void Problema::mostrarCursos(ostream& os){
@@ -36,6 +37,7 @@ void Problema::mostrarCursos(ostream& os){
 		}
 		os<<endl;
 	}
+	os<<endl;
 }
 
 bool myfunction (pair< pair<int,int>, int > i,pair< pair<int,int>, int > j){
@@ -57,11 +59,8 @@ Problema::Problema(istream& is){
 
 void Problema::resolver(){
 	mostrarCursos(cout);
-	cout<<endl;
 	verGraficamente(cout);
-	cout<<endl;
 	sort (_cursos.begin(), _cursos.end(), myfunction); // O(nlog(n)
-//	mostrarCursos(cout);
 	int final=0;
 	for (int i=0;i<_cursos.size();++i){
 		if (_cursos[i].first.first > final){
@@ -69,7 +68,5 @@ void Problema::resolver(){
 			final = _cursos[i].first.second;
 		}
 	}
-//	mostrarCursos(cout);
-	mostrarResultado(cout);
 }
 

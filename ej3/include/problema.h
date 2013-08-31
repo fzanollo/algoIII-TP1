@@ -27,6 +27,8 @@ struct Problema{
 	bool leApuntaUnLaserVertical(Casillero&);
 	void mostrarCasilleros(ostream&);
 	void cargarCasilleros();
+	void mostrarMatrizRes(ostream&);
+	void mostrarRes(ostream&);
 	void mostrarMatriz(ostream&);
 	bool leApuntanDosLasers(Casillero&);
 	bool puedoColocarSensor(Casillero&, int);

@@ -22,6 +22,39 @@ void Problema::mostrarMatriz(ostream& os){
 	}
 }
 
+void Problema::mostrarMatrizRes(ostream& os){
+	for (int i=0;i<_matrizRes.size();++i){
+		for (int j=0;j<_matrizRes[i].size();++j){
+			os << _matrizRes[i][j] <<" ";
+		}
+		os<<endl;
+	}
+}
+
+void Problema::mostrarRes(ostream& os){
+	int s=0;
+	if (_matrizRes.size()==0) os<<-1<<endl;
+	else{
+		for (int i=0;i<_matrizRes.size();++i)
+			for (int j=0;j<_matrizRes[i].size();++j)
+				if (_matrizRes[i][j]==3 || _matrizRes[i][j]==4 || _matrizRes[i][j]==5) s++;
+		os<<s<<" "<<_costo<<endl;
+		for (int i=0;i<_matrizRes.size();++i){
+			for (int j=0;j<_matrizRes[i].size();++j){
+				if (_matrizRes[i][j]==3){
+					os<<2<<" "<<i+1<<" "<<j+1<<endl;
+				}
+				if (_matrizRes[i][j]==4){
+					os<<1<<" "<<i+1<<" "<<j+1<<endl;
+				}
+				if (_matrizRes[i][j]==5){
+					os<<3<<" "<<i+1<<" "<<j+1<<endl;
+				}
+			}		
+		}
+	}
+}
+
 void Problema::mostrarCasilleros(ostream& os){
 	cout<<"Casilleros"<<endl;
 	for (int i=0;i<_casilleros.size();++i){
@@ -46,7 +79,6 @@ void Problema::cargarCasilleros(){
 }
 
 bool Problema::leApuntaUnLaserHorizontal(Casillero& casillero){
-//	cout<<"laser horizontal"<<endl;
 	for (int j=casillero.second+1; j<_matriz[casillero.first].size();++j){
 		if (_matriz[casillero.first][j] == 3 || _matriz[casillero.first][j] == 4) return true;
 		if (_matriz[casillero.first][j] == 0) break;
@@ -59,7 +91,6 @@ bool Problema::leApuntaUnLaserHorizontal(Casillero& casillero){
 }
 
 bool Problema::leApuntaUnLaserVertical(Casillero& casillero){
-//	cout<<"laser vertical"<<endl;
 	for (int i=casillero.first+1; i<_matriz.size();++i){
 		if (_matriz[i][casillero.second] == 5 || _matriz[i][casillero.second] == 4) return true;
 		if (_matriz[i][casillero.second] == 0)	break;
@@ -77,7 +108,6 @@ bool Problema::leApuntanDosLasers(Casillero& casillero){
 }
 
 bool Problema::puedoColocarSensor(Casillero& casillero, int sensor){ //chequea que no haya un sensor en su camino
-//	cout<<"puedoColocar"<<endl;
 	if (sensor==3){
 		for (int j=casillero.second+1; j<_matriz[casillero.first].size();++j){
 			if (_matriz[casillero.first][j] == 3 || _matriz[casillero.first][j] == 4 || _matriz[casillero.first][j] == 5) return false;
@@ -123,13 +153,10 @@ bool Problema::esSolucion(){
 
 void Problema::resolver(){
 	cargarCasilleros();
-	mostrarCasilleros(cout);
 	vector<bool> casillerosUsados(_casilleros.size()); //vector que lleva registro de qué casilleros fueron usados. 0=no fue usado, 1=fue usado.
 	int costo=0; //el costo antes de comenzar a colocar sensores es 0.
 	_costo=-1;
 	backtrack(casillerosUsados,costo);
-	_matriz = _matrizRes;
-	mostrarMatriz(cout);
 }
 
 bool Problema::hayMas(vector<bool>& casillerosUsados){
@@ -226,7 +253,6 @@ void Problema::backtrack(vector<bool>& casillerosUsados,int costo){
 	int aux;
 	if (!hayMas(casillerosUsados)){
 		if (esSolucion() && (costo<_costo || _costo==-1)){
-			cout<<costo<<endl;
 			_matrizRes=_matriz;
 			_costo=costo;
 		}
