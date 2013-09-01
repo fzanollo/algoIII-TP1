@@ -3,12 +3,11 @@
 \begin{algorithm}
 \caption{Pascual}\label{pascual}
 \begin{algorithmic}[1]
-\Procedure{Pascual}{$L, n, paquetes$}\Comment{L= peso límite, n= cant paquetes, paquetes= peso de c/paquete}
+\Procedure{Pascual}{$L, n, Paquetes$}\Comment{L= peso límite, n= cant paquetes, Paquetes= peso de c/paquete}
 	\State $Camiones\gets CrearVectorVacio()$
 	\State $HeapCamiones\gets CrearHeapVacio()$\Comment{HeapCamiones los ordena por peso, quedando el mímimo primero}
 	\State $k\gets 0$\Comment{k= cantidad de camiones}
-	\While{$QuedenPaquetes(paquetes)$}
-		\State $p\gets DameElSiguiente(paquetes)$
+	\ForAll{$p\ in\ Paquetes$}
 		\If{$PesoMinimo(HeapCamiones) + p \leq L$}
 			\State $PesoMinimo(HeapCamiones)\gets PesoMinimo(HeapCamiones)+p$
 			\State $Camiones[IndicePesoMinimo(HeapCamiones)]\gets PesoMinimo(HeapCamiones)$\\
@@ -18,8 +17,8 @@
 			\State $AgregarNuevoCamion(Camiones, p)$\Comment{agrego un nuevo camion con peso=p}
 			\State $AgregarNuevoCamion(HeapCamiones, p, k)$\Comment{agrego un nuevo camion con peso=p e índice=k}
 		\EndIf
-	\EndWhile\label{pascual}
-\State \textbf{return} $k+1,\ Camiones$\Comment{k+1 porque contamos desde 0}
+	\EndFor\label{pascual}
+\State \textbf{return} $k,\ Camiones$
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}
