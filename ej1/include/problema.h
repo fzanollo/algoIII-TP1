@@ -42,9 +42,6 @@ struct Problema{
 	void resolver();
 	Problema (istream&);
 	void mostrarResultado(ostream&);
-	
-
-	
 };
 
 #endif

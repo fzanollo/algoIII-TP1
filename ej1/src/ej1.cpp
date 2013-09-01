@@ -14,30 +14,25 @@ Problema::Problema(istream& is){
 	}
 }
 
-
-
-
 void Problema:: resolver(){
 	int k=0;  //k es el indice de los camiones
 	camion c(paquetes[0], k);
 	camiones.push_back(c.peso);  //pusheamos el peso del paquete a la lista de pesos de camiones
 	heap_camiones.push(c);		//pusheamos el camion al heap
 	
-
-	
 	for(int i =1; i< cant_paquetes;i++){
 		if(heap_camiones.top().peso + paquetes[i] <= peso_limite){ //si le entra
 				camion auxc(heap_camiones.top()); //tomo el camion mas liviano del heap
 				heap_camiones.pop(); //saco el mas liviano
 				auxc.peso = auxc.peso + paquetes[i];
-				heap_camiones.push(auxc);  //hay q sacarnos la duda de si se puede acceder al elemento una vez q lo metimos el el heap
+				heap_camiones.push(auxc);  //hay q sacarnos la duda de si se puede acceder al elemento una vez q lo metimos en el heap
 				camiones[auxc.indice] = auxc.peso;
-		}else{
+		}
+		else{
 				k++; //aumentamos el idice de camiones
 				camion mionca(paquetes[i],k);
 				heap_camiones.push(mionca);
 				camiones.push_back(mionca.peso);
-			
 		}
 	}
 	this->cant_camiones=k+1;

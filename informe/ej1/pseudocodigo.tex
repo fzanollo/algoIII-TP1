@@ -1,41 +1,26 @@
 \subsection{Pseudoc\'odigo}
+k camiones Resolver (Limite de peso, n, paquetes)\\
+camiones = crear vector vacio()\\
+heap camiones = crear heap vacio()\\
+k=0\\
+while queden paquetes\\
 
-Algunas aclaraciones:
-
-\begin{enumerate}[1.]
-\item Un cami\'on tiene un int peso (peso de paquetes que contiene) y un int \'indice (orden en el que fueron creados).
-\item Usamos dos estructuras, un "minheap" de camiones (se ordena de acuerdo al peso del camion) y un arreglo de camiones ordenado de acuerdo al indice de los camiones. 
-\end{enumerate}
-
-La funcion que resuelve el problema es la siguiente:
-
-
-void resolver(){
+	tomo un paquete p\\
 	
-	int camion_k = 0;  
-	camion c(paquetes[0], k);
-	camiones.push_back(c.peso);  //pusheamos el peso del paquete a la lista de pesos de camiones
-	heap_camiones.push(c);	    //pusheamos el camion al heap
+	if ( peso minimo(heap camiones) + p <= Limite de peso )\\
 	
-
+		le sumo el peso del paquete al camion que tenia el peso minimo del heap\\
+		
+		modifico el peso de ese camion en el vector camiones (accediendo mediante el
+		 indice)\\
+		 
+	else\\
 	
-	para(int i =1; i< cant_paquetes;i++){
-		si(paquetes[i] entra en el  ){ //si le entra
-				camion auxc(heap_camiones.top()); //tomo el camion mas liviano del heap
-				heap_camiones.pop(); //saco el mas liviano
-				auxc.peso = auxc.peso + paquetes[i];
-				heap_camiones.push(auxc);  // se puede acceder al elemento una vez q lo metimos el el heap?
-				camiones[auxc.indice] = auxc.peso;
-		}else{
-				k++; //aumentamos el idice de camiones
-				camion mionca(paquetes[i],k);
-				heap_camiones.push(mionca);
-				camiones.push_back(mionca.peso);
-			
-		}
-	}
-	this->cant_camiones=k+1;
-	mostrarResultado(cout);
-	
-}
-
+		k++ (agrego un camion)\\
+		
+		lo agrego al vector camiones\\
+		
+		lo agrego al heap\\
+		
+end while\\
+return k+1 camiones\\
