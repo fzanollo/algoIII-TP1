@@ -1,0 +1,44 @@
+\subsection{Complejidad}
+Para programar este algoritmo utilizamos un par de contenedores de datos definidos en la Standard Template Library: vector y priority\_queue. \\
+Las complejidades de las funciones de dichos contenedores fueron sacadas de sus respectivas documentaciones.\\
+
+Para ver la documentación del contenedor vector:  http://www.cplusplus.com/reference/vector/vector/\\
+
+Para ver la documentación del contenedor priority\_queue: 
+http://www.cplusplus.com/reference/queue/priority\_queue/\\
+
+Análisis de complejidad en el peor caso:\\
+
+\textbf{Inicio del algoritmo}\\
+
+Líneas 2 y 3: CrearVectorVacio()\footnote{http://www.cplusplus.com/reference/vector/vector/vector/}  y CrearHeapVacio()\footnote{http://www.cplusplus.com/reference/queue/priority\_queue/priority\_queue/}  tienen complejidad constante O(1).\\
+
+Línea 4: Asignar un valor a una variable también O(1).\\
+
+Línea 5 \textbf{Inicio del For}: Por cómo está definido el ciclo entra una vez por cada paquete. Complejidad lineal O(n), n=cantidad de paquetes.\\
+
+Línea 6 \textbf{Guarda del If}: Obtener el mínimo del heap es O(1).\footnote{http://www.cplusplus.com/reference/queue/priority\_queue/top/} Luego la suma y la comparación de enteros son constantes. Complejidad total de la guarda: O(1) + O(1) = O(1)\\
+
+Líneas 7 y 8 \textbf{Cuerpo del If}: Para poder modificar el elemento del heap debemos obtenerlo y luego reincorporarlo.\\
+Es decir, llamamos una vez a la función 'pop' de priority\_queue (esta función es O(2.log(k)), k= cantidad de camiones hasta el momento) y una vez a la función 'push' de priority\_queue (esta función es O(log(k)) )\\
+Luego debemos actualizar el peso del camión en el vector. Acceder al elemento y modificarlo es O(1).\\
+Complejidad total del cuerpo del If: O(2.log(k)) + O(log(k)) + O(1) = O(3.log(k)) = O(log(k))\\
+
+Líneas 11, 12 y 13 \textbf{Cuerpo del Else}: Modificar el valor de una variable es O(1).\\
+Luego creamos un nuevo camión O(1), lo agregamos al vector de camiones O(1) y al heap (función 'push' de priority\_queue) O(log(k)).\\
+Complejidad total del cuerpo del Else: O(1) + O(1) + O(log(k)) = O(log(k))\\
+
+Línea 14 \textbf{Fín If}: Complejidad en el peor caso del If = O(log(k))\\
+
+Línea 15 \textbf{Fín For}: Complejidad total: O(n).O(log(k)) = O(n.log(k))\\
+
+\begin{flushleft}
+\textbf{Complejidad total del algoritmo:} O(1) + O(1) + O(1) + O(n.log(k)) = \textbf{O(n.log(k))}\\
+\end{flushleft}
+\textbf{Siendo n=cantidad de paquetes y k=cantidad de camiones.}\\
+
+
+
+
+
+
