@@ -1,1 +1,25 @@
-\subsection{Pseudoc\'odigo}
+\subsection{Pseudocodigo y an\'alisis de complejidad}
+
+Sea $_cursos$ un vector de tuplas donde se almacenan los cursos de entrada del problema y $_cursosRes$ el vector donde se almacenan las tuplas elegidas como soluci\'on al problema. En la primera coordenada de las tuplas se encuentra el incicio y en la segunda el fin de cada curso.
+
+%%dejo mostrarcusos y verGraficamente???
+\begin{algorithmic}
+void resolver(){
+	\item mostrar Cursos de entrada
+	\item verlos Graficamente
+	\item ordenar de menor a mayor _cursos de acuerdo a las segundas coordenadas de las tuplas
+	\item int final=0;
+	\For{int i=0;i<_cursos.size();++i}
+	\If {_cursos[i].first.first > final}
+		_cursosRes.push_back(_cursos[i]);
+		final = _cursos[i].first.second;
+	\EndIf
+	\EndFor 
+		
+		
+	
+
+\end{algorithmic}
+
+La funci\'on que se utiliza para ordenar es sort, y su complejidad es O(n.log(n)) con n el tamaño del vector a ordenar (http://www.cplusplus.com/reference/algorithm/sort/?kw=sort).
+
