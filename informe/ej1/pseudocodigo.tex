@@ -1,11 +1,29 @@
 \subsection{Pseudoc\'odigo}
 
+Con el problema caracterizado buscamos modelarlo, veamos punto por punto:
+\begin{itemize}
+\item[1]- Como importa el orden, necesitamos una lista para representar los paquetes,y como lo que nos interesa es saber el peso de cada uno, utilizamos una lista de enteros.
+\item[2]- El peso límite estará reflejado por un entero y como es el mismo para todos, lo definimos de forma global.
+\item[3]- Este dato junto al punto 2, nos determina que todos los paquetes serán cargados y que siempre que se evalúe un paquete será ubicado. Es importante porque nos asegura que siempre recorremos la lista de paquetes una única vez, y en el número de paquetes.
+\item[4]- Cada vez que se agrega un nuevo camión tenemos que asegurarnos de contabilizarlo, para devolverlo en la salida.
+
+\item[5]- De este punto se desprenden muchas decisiones, algunas se justifican por la necesidad de alcanzar una cierta cota de complejidad, eso se explica más adelante:
+	\begin{enumerate}
+	\item[a] - Nos importa el peso que carga cada camión de los existentes, definimos una lista de enteros que los representen, se irán agregando según el orden de creación.
+	\item[b] - Al momento de evaluar donde poner un paquete, necesitamos saber el peso del que menor carga tiene (de los que posean carga), para ésto podríamos recorrer la lista de camiones y buscar el menor, pero para reducir la complejidad empleamos un heap con tuplas de dos enteros, una para el peso y otra para el índice del camión con respecto a la lista detallada en el punto a. El primero del heap será el de menor peso.
+	\item[c] - Nos queda simplemente recorrer la lista de paquetes en orden, con la información que nos da el primer elemento del heap sabemos si podemos colocarlo en el camión con menor carga, sino se coloca en uno nuevo y se contabiliza en el número de camiones. Hay que tener en cuenta que al cargar un paquete se deben actualizar el heap y la lista de camiones, de forma que la información sea consistente.
+	\end{enumerate}
+\end{itemize}
+La salida es la variable que cuenta camiones seguida de la lista del punto 5-a que contiene los pesos de los camiones según el orden de carga de su primer paquete.
+
+A continuación se muestra el pseudocódigo del algoritmo principal y se muestran los puntos descriptos anteriormente.
+
 \begin{algorithm}
 \caption{Pascual}\label{pascual}
 \begin{algorithmic}[1]
 \Procedure{Pascual}{$L, n, Paquetes$}\Comment{L= peso límite, n= cant paquetes, Paquetes= peso de c/paquete}
 	\State $Camiones\gets CrearVectorVacio()$
-	\State $HeapCamiones\gets CrearHeapVacio()$\Comment{HeapCamiones los ordena por peso, quedando el mímimo primero}
+	\State $HeapCamiones\gets CrearHeapVacio()$\Comment{HeapCamiones los ordena por peso, quedando el mínimo primero}
 	\State $k\gets 0$\Comment{k= cantidad de camiones}
 	\ForAll{$p\ in\ Paquetes$}
 		\If{$PesoMinimo(HeapCamiones) + p \leq L$}
