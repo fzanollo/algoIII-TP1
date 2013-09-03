@@ -1,13 +1,14 @@
 \subsection{Pseudocodigo y an\'alisis de complejidad}
 
+El algoritmo que resuelve el problema esta representado por el siguiente pseudocodigo:
 
 %%dejo mostrarcusos y verGraficamente???
 \begin{algorithm}
 \caption{Resolver}\label{resolver}
 \begin{algorithmic}[1]
 \Procedure{Resolver}{$n, cursos$}\Comment{n= cantidad de cursos, cursos= vector de tuplas con inicio y fin de cada curso}
-	\State $mostrarCursos$\Comment{Muestra los cursos de entrada}
-	\State $verGraficamente$\Comment{Los muestra de una manera mas amigable}
+	%\State $mostrarCursos$\Comment{Muestra los cursos de entrada}
+	%\State $verGraficamente$\Comment{Los muestra de una manera mas amigable}
 	\State $sort(cursos)$ \Comment{De menor a mayor de acuerdo a las segundas coordenadas}
 	\State $final \gets 0$
 	\For{$ i \gets 0, i< cursos.size(),++i$}
@@ -20,4 +21,16 @@
 \EndProcedure		
 \end{algorithmic}
 \end{algorithm}
+
+Pasemos a analizar la complejidad:
+
+\begin{itemize}
+  \item En la linea 2, usamos el algorimo sort definido en la biblioteca estandar de c++ (http://www.cplusplus.com/reference/algorithm/sort/?kw=sort).
+Su complejidad es N*log2(N), donde n es la cantidad de elementos del vector de entrada.
+
+  \item En la linea 4, el for realiza N iteraciones.
+  \item Luego la complejidad total es $N*log2(N)$, estrictamente menor a $N^{2}$.
+
+\end{itemize}
+
 
