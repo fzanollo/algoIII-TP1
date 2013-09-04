@@ -1,0 +1,109 @@
+\subsection{Explicación del Algoritmo}
+
+La idea del algoritmo es realizar un backtrack sobre los casilleros simples del museo ya que son los únicos casilleros en donde podemos colocar sensores. Para cada casillero tenemos cuatro opciones:
+
+\begin{itemize}
+\item[1] Colocar un sensor bidireccional horizontal
+\item[2] Colocar un sensor bidireccional vertical
+\item[3] Colocar un sensor cuatridireccional
+\item[4] No colocar nada
+\end{itemize}
+
+El algoritmo prueba los cuatro casos para cada casillero y marca los casilleros restantes dependiendo de la elección tomada. En caso de elegir las opciones 1,2 o 3 se marcan todos los casilleros cubiertos por el sensor como usados. Si, por el contrario, decide no colocarse nada solo se marca el casillero actual y se vuelve a llamar a la función Backtrack.
+
+El algoritmo dispone de las siguientes podas:
+
+\begin{itemize}
+\item Costo: el algoritmo verifica que la solución parcial construida no supere el costo de la mejor solución hallada hasta el momento. En caso de no haber encontrado ninguna solución hasta ese instante la poda no tiene efecto.
+\item puedoColocarSensor: verifica si un sensor puede colocarse en un casillero dado, es decir, chequea que no apunte a alguno de los sensores colocados.
+\item cumpleHastaElMomento: chequea para todos los casilleros importantes si en la solución parcial construida hasta el momento es posible hacer que el casillero sea apuntado por dos sensores. En caso de que no sea posible se corta con la rama de decisión.
+\end{itemize}
+
+Para modelar el problema utilizamos el siguiente struct:
+
+\begin{algorithm}[H]
+struct Problema $\{$ \\
+	vector$<$vector$<$int$>> \ \_matriz$ \\
+	vector$<$Casillero$> \ \_casilleros$ \\
+	vector$<$Casillero$> \ \_casillerosImportantes$ \\
+	vector$<$vector$<$int$>> \ \_matrizRes$ \\
+	int $\_costo$ \\
+$\}$
+\end{algorithm}
+
+en donde:
+
+\begin{itemize}
+	\item  $\_$matriz representa el piseo del museo y es en donde se carga la configuración inicial.
+	\item $\_$casilleros es un vector de Casillero (simples) y Casillero es un $pair<int,int>$ que indica las coordenadas en la $\_$matriz.
+	\item $\_$casillerosImportantes es un vector de casilleros importantes.
+	\item cuando se encuentra una solución, $\_$matrizRes almacena la grilla que representa el piso del museo con los sensores colocados y además se actualiza el valor de $\_$costo. 
+\end{itemize}
+
+Para resolver el problema realizamos el siguiente algoritmo:
+
+\begin{algorithm}
+\caption{Resolver}\label{Resolver}
+\begin{algorithmic}[1]
+\Procedure{Resolver}{}
+	\State $cargarCasilleros()$ \Comment{carga el vector de $\_$casilleros y $\_$casillerosImportantes teniendo en cuenta la configuración inicial.}
+	\State $casillerosUsados\gets CrearVectorDelTamañoDe\_Casilleros()$ \Comment{Inicializa el vector casillerosUsados en 0 para todas las posiciones.}
+	\State $int \ costo=0$ \Comment {Variable cuya función es almacenar el costo de una solución parcial}
+	\State $\_costo=-1$ \Comment{Es inicializado en -1 para marcar que no hay solución válida hasta el momento}
+	\State $Backtrack(casillerosUsados,costo)$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+A continuación presentamos un pseudocódigo de la función Backtrack:
+
+\begin{algorithm}[H]
+\caption{Backtrack}\label{Backtrack}
+\begin{algorithmic}[1]
+\Procedure{Backtrack}{$vector<int> casillerosUsados, int costo$}\Comment{casillerosUsados: casilleros que fueron cubiertos hasta el momento, costo: dinero acumulado hasta el momento.}
+	\State $vector<bool>\ casillerosUsadosViejo$ \Comment{vector auxiliar para que sea posible volver a una rama anterior dentro de nuestro arbol de decisiones}
+	\State $int\ aux$
+	\If{$\neg hayMas(casillerosUsados)$}
+		\If{$esSolucion() \wedge costo < \_costo$}
+			\State $\_matrizRes=\_matriz$ \Comment{guardo el resultado}
+			\State $\_costo=costo $ \Comment{actualizo el costo óptimo hasta el momento}
+		\EndIf
+	\Else
+		\If{$costo<\_costo \wedge cumpleHastaElMomento(casillerosUsados)$}
+			\State $casillerosUsadosViejo = casillerosUsados$ \Comment{Guardo una copia antes de que sea modificado.}
+			\ForAll{$c \in \_casilleros$}
+				\If{$\neg usado(c,casillerosUsados)$}
+					\ForAll{$s \in Sensores$}
+						\If{$puedoColocarSensor(c,s,\_matriz)$}
+							\State $InsertarSensor(c,s\_matriz)$ 
+							\State $marcarCasilleros(c,s,casillerosUsados)$
+							\If{$esSensorBidireccional(s)$} 
+								\State $backtrack(casillerosUsados,costo+4000)$
+							\Else
+								\State $backtrack(casillerosUsados,costo+6000)$
+							\EndIf
+							\State $casillerosUsados=casillerosUsadosViejo$
+						\EndIf
+					\EndFor
+					\Comment{Caso en el que no se inserta ningún sensor.}
+					\State $marcarCasillero(c,casillerosUsados)$
+					\State $backtrack(casillerosUsados,costo)$
+					\State $casillerosUsados=casillerosUsadosViejo$
+				\EndIf
+			\EndFor
+		\EndIf
+	\EndIf	
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+en donde:
+
+\begin{itemize}
+	\item hayMas(casillerosUsados) verifica si hay algun casillero sin ser cubierto.
+	\item esSolucion() chequea si la disposición actual de los sensores es efectivamente un resultado válido. Se asegura que no haya sensores apuntándose entre si, que todos los casilleros se encuentren cubiertos y que los casilleros importantes sean apuntados por dos sensores.
+	\item usado(c,CasillerosUsados) verifica que el casillero c está cubierto.
+	\item puedoColocarSensor(c,s,$\_$matriz) utilizando $\_$matriz verifica si es posible agregar el sensor s en el casillero c sin apuntar a otro sensor.
+	\item InsertarSensor(c,s,$\_$matriz) inserta el sensor s en el casillero c de $\_$matriz.
+	\item marcarCasilleros(c,s,casillerosUsados) marca como cubiertos a todos los casilleros apuntados por s.
+\end{itemize}
