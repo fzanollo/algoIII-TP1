@@ -23,7 +23,7 @@ int main()
 	}
 	for(int i = 0;i<cantProblemas;i++){
 		problemas[i].resolver();
-//		problemas[i].mostrarMatrizRes(cout);
+		problemas[i].mostrarMatrizRes(cout);
 		problemas[i].mostrarRes(cout);
 	}
     return 0;
