@@ -125,7 +125,7 @@ bool Problema::puedoColocarSensor(Casillero& casillero, int sensor){ //chequea q
 	}
 	
 	if (sensor==5){
-		for (int i=casillero.first+1; i<_matriz[casillero.first].size();++i){
+		for (int i=casillero.first+1; i<_matriz.size();++i){
 			if (_matriz[i][casillero.second] == 3 || _matriz[i][casillero.second] == 4 || _matriz[i][casillero.second] == 5) return false;
 			if (_matriz[i][casillero.second] == 0) break;
 		}
