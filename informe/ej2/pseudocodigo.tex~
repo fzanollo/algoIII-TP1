@@ -1,6 +1,6 @@
 \subsection{Pseudocodigo y an\'alisis de complejidad}
 
-La idea del algoritmo es ordenar los cursos según su tiempo de finalización de menor a mayor y luego recorrerlos e ir agrenando los cursos al resultado final en caso de que no se solape con el último curso agregado. Más adelante veremos que resolverlo de esta forma nos devuelve una solución óptima.
+La idea del algoritmo es ordenar los cursos según su tiempo de finalización de menor a mayor y luego recorrerlos e ir agrenando los cursos al resultado final en caso de que no se solape con el último curso agregado.
 
 El algoritmo que resuelve el problema esta representado por el siguiente pseudocodigo:
 

@@ -1,17 +1,15 @@
 \subsection{Pseudocodigo y an\'alisis de complejidad}
 
-La idea del algoritmo es ordenar los cursos según su tiempo de finalización de menor a mayor y luego recorrerlos e ir agrenando los cursos al resultado final en caso de que no se solape con el último curso agregado. Más adelante veremos que resolverlo de esta forma nos devuelve una solución óptima.
-
 El algoritmo que resuelve el problema esta representado por el siguiente pseudocodigo:
 
 %%dejo mostrarcusos y verGraficamente???
-\begin{algorithm}[H]
+\begin{algorithm}
 \caption{Resolver}\label{resolver}
 \begin{algorithmic}[1]
-\Procedure{Resolver}{$n, cursos$}\Comment{n= cantidad de cursos, cursos= $tupla< <inicio,fin>, id >$}
+\Procedure{Resolver}{$n, cursos$}\Comment{n= cantidad de cursos, cursos= tupla< <inicio,fin>, id >}
 	%\State $mostrarCursos$\Comment{Muestra los cursos de entrada}
 	%\State $verGraficamente$\Comment{Los muestra de una manera mas amigable}
-	\State $sort(cursos)$ \Comment{De menor a mayor de acuerdo al tiempo de finalización}
+	\State $sort(cursos)$ \Comment{De menor a mayor de acuerdo a las segundas coordenadas}
 	\State $final \gets 0$
 	\For{$ i \gets 0, i< cursos.size(),++i$}
 	\If {$ cursos[i].first.first > final$}
