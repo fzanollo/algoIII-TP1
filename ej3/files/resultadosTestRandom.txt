@@ -1,0 +1,6 @@
+Problema Nº0
+0 10360
+Problema Nº1
+1 11396
+Problema Nº2
+5 10094

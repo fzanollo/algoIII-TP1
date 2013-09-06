@@ -14,11 +14,7 @@ int main()
 		cout<< n << " " << m << endl;
 		for (int i=0;i<n;i++){
 			for(int j=0;j<m;j++){
-				int casillero= rand()%100+1;
-				if(casillero>90) casillero=2;
-				else if(casillero>60) casillero=0;
-				else casillero=1;
-				cout<< casillero;
+				cout<< (i+j)%2;
 				if(j!=(m-1)) cout<< " ";
 			}
 			cout<<endl;

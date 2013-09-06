@@ -7,3 +7,4 @@ clean:
 	rm -f ej3
 	rm -f tester
 	rm -f casos
+	rm -f random
