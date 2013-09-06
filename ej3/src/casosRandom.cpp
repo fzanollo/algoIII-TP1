@@ -9,8 +9,8 @@ int main()
 	cin>>cant_casos;
 	for(int x=0; x<cant_casos ;x++){
 		int n, m;
-		n=rand()%10+1;
-		m=rand()%10+1;
+		n=rand()%6+1;
+		m=rand()%6+1;
 		cout<< n << " " << m << endl;
 		for (int i=0;i<n;i++){
 			for(int j=0;j<m;j++){
