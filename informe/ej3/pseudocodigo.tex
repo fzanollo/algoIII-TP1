@@ -75,13 +75,14 @@ A continuación presentamos un pseudocódigo de la función Backtrack:
 				\If{$\neg usado(c,casillerosUsados)$}
 					\ForAll{$s \in Sensores$}
 						\If{$puedoColocarSensor(c,s,\_matriz)$}
-							\State $InsertarSensor(c,s\_matriz)$ 
+							\State $InsertarSensor(c,s,\_matriz)$ 
 							\State $marcarCasilleros(c,s,casillerosUsados)$
 							\If{$esSensorBidireccional(s)$} 
 								\State $backtrack(casillerosUsados,costo+4000)$
 							\Else
 								\State $backtrack(casillerosUsados,costo+6000)$
 							\EndIf
+							\State $sacarSensor(c,s,\_matriz)$ 
 							\State $casillerosUsados=casillerosUsadosViejo$
 						\EndIf
 					\EndFor
@@ -106,4 +107,5 @@ en donde:
 	\item puedoColocarSensor(c,s,$\_$matriz) utilizando $\_$matriz verifica si es posible agregar el sensor s en el casillero c sin apuntar a otro sensor.
 	\item InsertarSensor(c,s,$\_$matriz) inserta el sensor s en el casillero c de $\_$matriz.
 	\item marcarCasilleros(c,s,casillerosUsados) marca como cubiertos a todos los casilleros apuntados por s.
+	\item sacarSensor(c,s,$\_$matriz) saca el sensor s que se encontraba en el casillero c de $\_$matriz.
 \end{itemize}

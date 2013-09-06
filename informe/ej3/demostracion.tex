@@ -1,2 +1,11 @@
 \subsection{Correctitud del algoritmo}
-El algoritmo es correcto ya que para cada uno de los casilleros disponibles prueba colocar los tres sensores presentes y no colocar nada. A su vez las podas no restringen posibles soluciones porque se encargan simplemente de hacer o verificar que la rama de decisiones tomadas sea válida. Si se analizan todas las soluciones es lógico pensar que el algoritmo va a encontrar una óptima.
+
+Dado que el algoritmo se basa en un Backtracking podado y considerando que prueba $todas$ las posibles configuraciones de sensores en la grilla, podemos asegurar que si existe soluci\'on, el algoritmo la encuentra. As\'i mismo, como el Backtrack descarta soluciones con mayor costo en la misma, la soluci\'on con la que se queda en caso de existir una es la \'optima.
+Si el algoritmo fuera una búsqueda de $fuerza \ bruta$ es evidente que la solución hallada va a ser la mejor porque prueba todas las combinaciones posibles. ¿Cómo verificar que no se pierden configuraciones que podrían llegar a ser óptimas? Habría que chequear que las podas implementadas no cortan con ramas de decisión que podrían llegar a serlo. Si esto sucede podemos asegurar que el algortimo funciona bien. Veamos que así sucede:
+\begin{itemize}
+	\item la poda que verifica el costo de la solución parcial hallada hasta el momento no perjudica a la solución final ya que esa solución parcial nunca podría llegar a ser óptima porque previamente se encontro una mejor.
+	\item la función marcarCasilleros se encarga de quitar en una rama de decisión aquellos casilleros en los cuales no va a ser posible colocar un sensor debido a que se encuentra apuntado por otro. Esta poda no puede afectar la búsqueda de una solución óptima.
+	\item la función cumpleHastaElMomento verifica que para todos los casilleros importantes tales que los casilleros de su fila y columna fueron marcados haya algún sensor que los apunte ya que en caso contrario la solución sería inválida. Esta poda tampoco afecta a la búsqueda de una solución.
+	\item Por último, puedeColocarSensor tampoco entorpece la búsqueda ya que solo verífica que al momento de colocar un sensor en una casillero dado, el sensor no apunte a otro sensor. 
+\end{itemize}
+Teniendo en cuenta que las podas no son erróneas podemos concluir que el algoritmo efectivamente va a hallar una solución óptima si es que la hay.
