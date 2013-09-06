@@ -31,7 +31,9 @@ int main()
 		MEDIR_TIEMPO_START(start);
 		problemas[i].resolver();
 		MEDIR_TIEMPO_STOP(end);
-		result=end-start;	
+		result=end-start;
+		cout<< "Problema Nº" << i<< endl;
+		//problemas[i].mostrarRes(cout);	
 		mostrarCiclos(cout,problemas[i]._casilleros.size(),result);
 	}
     return 0;

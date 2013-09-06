@@ -5,15 +5,24 @@ using namespace std;
 
 int main()
 {
-	int limite;
-	cin>>limite;
-	for (int i=1;i<=limite;++i){
-		cout << 1 << " " << i <<endl;
-		for (int j=1;j<=i;++j){
-			if (j==i) cout <<1;
-			else cout <<1<<" ";
+	int cant_casos;
+	cin>>cant_casos;
+	for(int x=0; x<cant_casos ;x++){
+		int n, m;
+		cin>>n;
+		cin>>m;
+		cout<< n << " " << m << endl;
+		for (int i=0;i<n;i++){
+			for(int j=0;j<m;j++){
+				int casillero= rand()%100+1; //para q haya casilleros importantes pero no tantos y paredes pero no tantas
+				if(casillero>90) casillero=2;
+				else if(casillero>60) casillero=0;
+				else casillero=1;
+				cout<< casillero;
+				if(j!=(m-1)) cout<< " ";
+			}
+			cout<<endl;
 		}
-		cout <<endl;
 	}
 	cout <<"#"<<endl;
 	return 0;

@@ -58,8 +58,8 @@ Problema::Problema(istream& is){
 }
 
 void Problema::resolver(){
-	mostrarCursos(cout);
-	verGraficamente(cout);
+	//mostrarCursos(cout);
+	//verGraficamente(cout);
 	sort (_cursos.begin(), _cursos.end(), myfunction); // O(nlog(n)
 	int final=0;
 	for (int i=0;i<_cursos.size();++i){
