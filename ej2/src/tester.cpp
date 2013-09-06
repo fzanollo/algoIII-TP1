@@ -37,6 +37,7 @@ int main()
 			result+= (end-start);	
 		}
 		result= result / cant_repeticiones;
+		result= result / 1000;
 		mostrarCiclos(cout,problemas[i]._cursos.size(),result);
 	}
     return 0;

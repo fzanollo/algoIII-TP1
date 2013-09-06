@@ -39,6 +39,7 @@ int main()
 			result+= (end-start);
 		}	
 			result= result / cantRepeticiones;
+			result= result/1000;
 			mostrarCiclos(cout, problemas[i].cant_paquetes, result);
 	}
     

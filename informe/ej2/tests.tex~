@@ -3,7 +3,9 @@
 
 Para generar estas instancias utilizamos la función rand() incluida en la Standard General Utilities Library\footnote{http://www.cplusplus.com/reference/cstdlib/}. Esta función genera números pseudo-random.\\
 
-Nuestro generador de casos requiere como datos de entrada una cantidad máxima de paquetes, luego crea casos distintos desde 1 paquete hasta la cantidad pasada de la siguiente manera:\\
-Genera un peso límite al azar entre 1 y 100.\\
-Para cada paquete genera un peso individual al azar entre 1 y peso límite.\\
+Nuestro generador de casos requiere como datos de entrada una cantidad máxima de cursos, luego crea casos distintos desde 1 curso hasta la cantidad pasada de la siguiente manera:\\
+Genera un número al azar 'hasta día', este número define el rango total de los cursos [1.. hasta día] en pos de que sucedan más colisiones.\\
+Genera inicios y fines de cada curso, dentro del rango [1..hasta día].\\
+
+
 

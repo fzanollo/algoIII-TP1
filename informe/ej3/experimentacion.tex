@@ -14,11 +14,11 @@ Observemos, ahora, cómo se comportan las podas. Analicemos una por una. Veamos 
 
 La poda $cumpleHastaElMomento$ que se encargaba de verificar que los casilleros importantes fueran cubiertos debería ayudar al algoritmo a devovlver rápidamente que no se encuentra solución. Esto se debe a qué antes de continuar por una rama la poda detecta que no es posible cubrir al casillero imporante con dos sensores. Veamos cómo se comporta el algoritmo con y sin la poda:
 
-\includegraphics[scale=0.2]{ej3/imgs/cumpleHastaElMomento.png}
+\includegraphics[scale=0.3]{ej3/imgs/cumpleHastaElMomento.png}
 
 La diferencia es tan grande que no llega a verse una barra asociada al algorimo con poda. Veamos cómo funciona la poda $marcarCasilleros$ que se asegura de marcar los casilleros que se encuentran apuntados al momento de insertar un sensor en la grilla. Esta vez probemos la poda en una matriz de $2*2$ llena de casillerosSimples:
 
-\includegraphics[scale=0.2]{ej3/imgs/22casos.png}
+\includegraphics[scale=0.3]{ej3/imgs/22casos.png}
 
 Si bien la diferencia no es tan grande como en el caso anterior podemos apreciar una mejoría importante al utilizar la poda.
 
@@ -28,6 +28,6 @@ Por último, veamos cómo se comportan las podas para el siguiente caso:
 
 Por lo visto en la sección de complejidad es de esperar que en este ejemplo y en todas las familias de casos similares, las podas no tegan un efecto positivo en cuando a rendimiento. Veamos si es verdad:
 
-\includegraphics[scale=0.2]{ej3/imgs/ajedrez.png}
+\includegraphics[scale=0.3]{ej3/imgs/ajedrez.png}
 
 Si bien las barras parecen ser muy distintas es importante notar que la diferencia no es tan grande. Mientras uno hace 526000 miles de ciclos, el otro realiza 527000 miles de ciclos.
