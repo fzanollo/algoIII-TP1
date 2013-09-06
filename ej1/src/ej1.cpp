@@ -33,7 +33,7 @@ void Problema:: resolver(){
 		}
 	}
 	this->cant_camiones=k+1;
-	//mostrarResultado(cout);
+	mostrarResultado(cout);
 	
 }
 
