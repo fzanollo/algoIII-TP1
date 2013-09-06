@@ -10,7 +10,7 @@ int main()
 	
 	for (int i=1;i<=cant_max_cursos;++i){
 		cout<< i << " ";
-		int hasta_dia=20;
+		int hasta_dia= rand()%50+1;
 		
 		for(int j=1; j<=i; j++){
 			int inicio= rand() % hasta_dia +1; //elige un comienzo entre [1 ... hasta_dia]
