@@ -3,7 +3,7 @@ Para determinar la complejidad del algoritmo es necesario evaluar en primera ins
 
 \includegraphics[scale=0.5]{ej3/imgs/ajedrezDibujo.png}
 
-Como podemos observar, el hecho de que las paredes se encuentren ubicadas de esta forma me fuerzan a que las combinaciones que tenga que probar sean 4 por casillero porque colocar sensores en cualquier casillero libre no afecta a otros casilleros por el simple hecho de que los lasers emitidos no van a impactar en ninguno de ellos como consecuencia de las paredes. Es por esta razón que tendremos que probar $4^C$ combinaciones en donde C es la cantidad de casilleros libres. Observando el gráfico se deduce que la cantidad de casilleros libres es la mitad de la cantidad de casilleros presentes, es decir, $(n*m)/2$.
+Como podemos observar, el hecho de que las paredes se encuentren ubicadas de esta forma fuerzan a que las combinaciones que tenga que probar el Backtrack sean 4 por casillero porque colocar sensores en cualquier casillero libre no afecta a otros casilleros por el simple hecho de que los lasers emitidos no van a impactar en ninguno de ellos como consecuencia de las paredes. Es por esta razón que deberá probar $4^C$ combinaciones en donde C es la cantidad de casilleros libres. Observando el gráfico se deduce que la cantidad de casilleros libres es la mitad de la cantidad de casilleros presentes, es decir, $(n*m)/2$.
 
 Resumiendo, el algoritmo tendrá que realizar probar $4^{(n*m)/2}$ combinaciones en total en donde cada combinacion tiene un costo que esta determinado por complejidad de las operaciones que realizamos en cada llamada a la función Backtrack. Veamos cuál es el coste analizando el pseudocódigo:
 
