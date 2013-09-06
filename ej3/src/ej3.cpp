@@ -38,7 +38,7 @@ void Problema::mostrarRes(ostream& os){
 		for (int i=0;i<_matrizRes.size();++i)
 			for (int j=0;j<_matrizRes[i].size();++j)
 				if (_matrizRes[i][j]==3 || _matrizRes[i][j]==4 || _matrizRes[i][j]==5) s++;
-		os<< "cantidad de sensores: " << s << " costo: "<<_costo<<endl;
+		os<< s << " "<<_costo<<endl;
 		for (int i=0;i<_matrizRes.size();++i){
 			for (int j=0;j<_matrizRes[i].size();++j){
 				if (_matrizRes[i][j]==3){
